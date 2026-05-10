@@ -1,0 +1,8 @@
+1. Run docker command and replace necessary variables (from https://github.com/dani-garcia/vaultwarden): 
+docker pull vaultwarden/server:latest
+docker run --detach --name vaultwarden \
+  --env DOMAIN="https://vw.domain.tld" \
+  --volume /vw-data/:/data/ \
+  --restart unless-stopped \
+  --publish 127.0.0.1:8000:80 \
+  vaultwarden/server:latest
