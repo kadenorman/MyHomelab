@@ -1,0 +1,16 @@
+arch: amd64
+cores: 1
+features: keyctl=1,nesting=1
+hostname: Tailscale
+memory: 512
+nameserver: 1.1.1.1
+net0: name=eth0,bridge=vmbr0,gw=10.0.0.1,hwaddr=BC:24:11:CF:6E:B2,ip=10.0.0.3/24,type=veth
+ostype: ubuntu
+rootfs: local-lvm:vm-101-disk-0,size=5G
+searchdomain: 1.1.1.1
+swap: 512
+unprivileged: 1
+
+# Allow passthrough of TUN network module
+lxc.cgroup2.devices.allow: c 10:200 rwm
+lxc.mount.entry: /dev/net/tun dev/net/tun none bind,create=file
