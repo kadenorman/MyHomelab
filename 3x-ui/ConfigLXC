@@ -1,0 +1,12 @@
+arch: amd64
+cores: 2
+features: nesting=1
+hostname: Xray3XUI
+memory: 1024
+nameserver: 1.1.1.1
+net0: name=eth0,bridge=vmbr0,firewall=1,gw=10.0.0.1,hwaddr=BC:24:11:E1:74:0F,ip=10.0.0.30/24,ip6=dhcp,type=veth
+ostype: ubuntu
+rootfs: local-lvm:vm-103-disk-1,size=10G
+searchdomain: 1.1.1.1
+swap: 512
+unprivileged: 1
