@@ -1,0 +1,7 @@
+From https://jellyfin.org/docs/general/installation/linux#debian--ubuntu-and-derivatives:
+curl -s https://repo.jellyfin.org/install-debuntu.sh -O && \
+curl -s https://repo.jellyfin.org/install-debuntu.sh.sha256sum -O && \
+sha256sum -c install-debuntu.sh.sha256sum
+
+Then install:
+sudo bash install-debuntu.sh
