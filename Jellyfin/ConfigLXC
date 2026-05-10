@@ -1,0 +1,23 @@
+arch: amd64
+cores: 4
+hostname: Jellyfin
+memory: 8192
+mp0: hdd-storage:102/vm-102-disk-0.raw,mp=/jellyfin,size=300G
+nameserver: 1.1.1.1
+net0: name=eth0,bridge=vmbr0,gw=10.0.0.1,hwaddr=BC:24:11:2A:4E:D6,ip=10.0.0.4/24,type=veth
+ostype: ubuntu
+rootfs: local-lvm:vm-102-disk-0,size=64G
+searchdomain: 1.1.1.1
+swap: 1024
+unprivileged: 1
+
+# Allow passthrough of gpu
+lxc.cgroup2.devices.allow: c 195:* rwm
+lxc.cgroup2.devices.allow: c 507:* rwm
+lxc.cgroup2.devices.allow: c 511:* rwm
+lxc.mount.entry: /dev/nvidia0 dev/nvidia0 none bind,optional,create=file
+lxc.mount.entry: /dev/nvidiactl dev/nvidiactl none bind,optional,create=file
+lxc.mount.entry: /dev/nvidia-uvm dev/nvidia-uvm none bind,optional,create=file
+lxc.mount.entry: /dev/nvidia-uvm-tools dev/nvidia-uvm-tools none bind,optional,create=file
+lxc.mount.entry: /dev/nvidia-caps/nvidia-cap1 dev/nvidia-caps/nvidia-cap1 none bind,optional,create=file
+lxc.mount.entry: /dev/nvidia-caps/nvidia-cap2 dev/nvidia-caps/nvidia-cap2 none bind,optional,create=file
