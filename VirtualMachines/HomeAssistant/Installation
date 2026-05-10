@@ -1,0 +1,2 @@
+1. Run script in PROXMOX NODE NOT IN LXC (from https://community-scripts.org/)
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/community-scripts/ProxmoxVE/main/vm/haos-vm.sh)"
