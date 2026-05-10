@@ -1,0 +1,12 @@
+Nvidia GPU passthrough:
+wget https://us.download.nvidia.com/XFree86/Linux-x86_64/595.71.05/NVIDIA-Linux-x86_64-595.71.05.run
+chmod +x NVIDIA*.run
+./NVIDIA*.run --no-kernel-modules
+
+
+From https://docs.kasm.com/docs/install/single_server_install
+Kasm workspaces installation:
+cd /tmp
+curl -O https://kasm-static-content.s3.amazonaws.com/KASM_RELEASE_FROM_WEBSITE.tar.gz
+tar -xf KASM_RELEASE_FROM_WEBSITE.tar.gz
+sudo bash kasm_release/install.sh
