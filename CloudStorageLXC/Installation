@@ -1,4 +1,4 @@
-Docker run command for nextcloud AIO:
+1. Docker run command for nextcloud AIO:
 sudo docker run \
   --init \
   --sig-proxy=false \
@@ -16,3 +16,6 @@ sudo docker run \
 
 
 Publishes web interface on 8080 and 11000 for nginx proxy manager. Stores data in NEXTCLOUD_DATADIR.
+
+2. Splits large uploads into chunks to stop cloudflare from denying upload
+sudo docker exec --user www-data nextcloud-aio-nextcloud php occ config:app:set files max_chunk_size --value 10485760
