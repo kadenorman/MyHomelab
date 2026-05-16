@@ -1,0 +1,4 @@
+Add mount point in resources --> add mount point
+
+On proxmox host:
+chmod -R 777 /mnt/pve/storage/file
