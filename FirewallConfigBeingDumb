@@ -1,0 +1,13 @@
+how to not get proxmox firewall to not block all lxc traffic:
+1. Check iptable rules, if masquerading/
+iptables -t nat -L POSTROUTING -v -n --line-numbers
+
+2. delete rule
+iptables -t nat -D POSTROUTING -j MASQUERADE
+
+3. 
+iptables -t nat -A POSTROUTING -s 10.0.0.0/24 -o eno1 -j MASQUERADE
+
+4. edit /etc/network/interfaces on host and add to bridge interface
+post-up   iptables -t nat -A POSTROUTING -s '10.0.0.0/24' -o eno1 -j MASQUERADE
+post-down iptables -t nat -D POSTROUTING -s '10.0.0.0/24' -o eno1 -j MASQUERADEpost-up   
