@@ -1,4 +1,4 @@
-how to not get proxmox firewall to not block all lxc traffic:
+how to not get proxmox firewall to not block all lxc traffic (ON HOST):
 1. Check iptable rules, if masquerading/
 iptables -t nat -L POSTROUTING -v -n --line-numbers
 
@@ -10,4 +10,29 @@ iptables -t nat -A POSTROUTING -s 10.0.0.0/24 -o eno1 -j MASQUERADE
 
 4. edit /etc/network/interfaces on host and add to bridge interface
 post-up   iptables -t nat -A POSTROUTING -s '10.0.0.0/24' -o eno1 -j MASQUERADE
-post-down iptables -t nat -D POSTROUTING -s '10.0.0.0/24' -o eno1 -j MASQUERADEpost-up   
+post-down iptables -t nat -D POSTROUTING -s '10.0.0.0/24' -o eno1 -j MASQUERADEpost-up
+
+
+In order to fix kasm workspaces container in lxc 100
+
+1. Rebuild docker lxc with legacy iptables to match host (ON LXC) 
+update-alternatives --set iptables /usr/sbin/iptables-legacy
+update-alternatives --set ip6tables /usr/sbin/ip6tables-legacy
+
+iptables -F 2>/dev/null
+iptables -t nat -F 2>/dev/null
+
+systemctl restart docker
+
+iptables --version   # should now say legacy
+iptables -L DOCKER -v -n
+
+2. Make changes permanent
+cat > /etc/network/if-pre-up.d/iptables-legacy << 'EOF'
+#!/bin/sh
+update-alternatives --set iptables /usr/sbin/iptables-legacy
+update-alternatives --set ip6tables /usr/sbin/ip6tables-legacy
+EOF
+
+chmod +x /etc/network/if-pre-up.d/iptables-legacy
+
